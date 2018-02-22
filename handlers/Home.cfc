@@ -1,13 +1,7 @@
-/**
- * A ColdBox Event Handler
- */
 component{
-
-	/**
-	 * Home page
-	 */
+	property name="mailgun" inject="mailgun";
 	function index( event, rc, prc ){
-		event.setView( "home/index" );
+		writedump(mailgun.getstats())
+		abort;
 	}
-
 }

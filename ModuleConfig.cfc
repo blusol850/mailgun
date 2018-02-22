@@ -49,9 +49,9 @@ component {
 	this.description 		= "";
 	this.version			= "1.0.0";
 	// If true, looks for views in the parent first, if not found, then in the module. Else vice-versa
-	this.viewParentLookup 	= true;
+	this.viewParentLookup 	= false;
 	// If true, looks for layouts in the parent first, if not found, then in module. Else vice-versa
-	this.layoutParentLookup = true;
+	this.layoutParentLookup = false;
 	// Module Entry Point
 	this.entryPoint			= "mailgun";
 	// Inherit Entry Point
@@ -74,6 +74,10 @@ component {
 
 		// module settings - stored in modules.name.settings
 		settings = {
+			secretApiKey = 'key-xxx', 
+			publicApiKey = 'pubkey-xxx', 
+			domain = 'yourdomain.com', 
+			baseUrl = 'https://api.mailgun.net/v3' 
 
 		};
 
@@ -113,6 +117,14 @@ component {
 	* Fired when the module is registered and activated.
 	*/
 	function onLoad(){
+		parseParentSettings();
+		var MailGunSettings = controller.getConfigSettings().MailGunSettings;
+		binder.map( "mailgun" )
+			.to( "#moduleMapping#.mailgun" )
+			.initArg( name="secretApiKey", 	value=MailGunSettings.secretApiKey )
+			.initArg( name="publicApiKey", 	value=MailGunSettings.publicApiKey )
+			.initArg( name="domain", 		value=MailGunSettings.domain )
+			.initArg( name="baseUrl", 		value=MailGunSettings.baseUrl );
 
 	}
 
@@ -122,5 +134,17 @@ component {
 	function onUnload(){
 
 	}
+
+	/**
+	* parse parent settings
+	*/
+	private function parseParentSettings(){
+		var oConfig 		= controller.getSetting( "ColdBoxConfig" );
+		var configStruct 	= controller.getConfigSettings();
+		configStruct.MailGunSettings = variables.settings;
+		
+}
+
+	
 
 }

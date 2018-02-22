@@ -2,12 +2,12 @@
     "name":"mailgun",
     "version":"1.0.0",
     "author":"Andrew Davis",
-    "location":"",
+    "location":"https://github.com/blusol850/mailgun/archive/master.zip",
     "homepage":"https://github.com/blusol850/mailgun",
-    "documentation":"",
+    "documentation":"https://github.com/blusol850/mailgun",
     "repository":{
-        "type":"",
-        "URL":""
+        "type":"git",
+        "URL":"https://github.com/blusol850/mailgun"
     },
     "bugs":"",
     "slug":"mailgun",
@@ -15,7 +15,7 @@
     "description":"",
     "instructions":"",
     "changelog":"",
-    "type":"",
+    "type":"modules",
     "keywords":"mailgun, email, sendmail, postman",
     "private":false,
     "projectURL":"",
