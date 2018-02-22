@@ -43,74 +43,66 @@ Optional Methods
 component {
 
 	// Module Properties
-	this.title 				= "mailgun";
-	this.author 			= "";
-	this.webURL 			= "";
-	this.description 		= "";
-	this.version			= "1.0.0";
+	this.title 				= 'mailgun';
+	this.author 			= '';
+	this.webURL 			= '';
+	this.description 		= '';
+	this.version			= '1.0.0';
 	// If true, looks for views in the parent first, if not found, then in the module. Else vice-versa
 	this.viewParentLookup 	= false;
 	// If true, looks for layouts in the parent first, if not found, then in module. Else vice-versa
 	this.layoutParentLookup = false;
 	// Module Entry Point
-	this.entryPoint			= "mailgun";
+	this.entryPoint			= 'mailgun';
 	// Inherit Entry Point
 	this.inheritEntryPoint 	= false;
 	// Model Namespace
-	this.modelNamespace		= "mailgun";
+	this.modelNamespace		= 'mailgun';
 	// CF Mapping
-	this.cfmapping			= "mailgun";
+	this.cfmapping			= 'mailgun';
 	// Auto-map models
 	this.autoMapModels		= true;
 	// Module Dependencies
 	this.dependencies 		= [];
 
 	function configure(){
-
 		// parent settings
-		parentSettings = {
-
-		};
+		parentSettings = {};
 
 		// module settings - stored in modules.name.settings
 		settings = {
-			secretApiKey = 'key-xxx', 
-			publicApiKey = 'pubkey-xxx', 
-			domain = 'yourdomain.com', 
-			baseUrl = 'https://api.mailgun.net/v3' 
-
+			secretApiKey = 'key-xxx',
+			publicApiKey = 'pubkey-xxx',
+			domain = 'yourdomain.com',
+			baseUrl = 'https://api.mailgun.net/v3'
 		};
 
 		// Layout Settings
-		layoutSettings = {
-			defaultLayout = ""
-		};
+		layoutSettings = { defaultLayout = '' };
 
 		// SES Routes
 		routes = [
 			// Module Entry Point
-			{ pattern="/", handler="home", action="index" },
+			{
+				pattern='/',
+				handler='home',
+				action='index'
+			},
 			// Convention Route
-			{ pattern="/:handler/:action?" }
+			{ pattern='/:handler/:action?' }
 		];
 
 		// SES Resources
-		resources = [
-			// { resource = "" }
-		];
+		resources = [ // { resource = "" } ];
 
 		// Custom Declared Points
-		interceptorSettings = {
-			customInterceptionPoints = ""
-		};
+		interceptorSettings = { customInterceptionPoints = '' };
 
 		// Custom Declared Interceptors
-		interceptors = [
-		];
+		interceptors = [];
 
 		// Binder Mappings
 		// binder.map("Alias").to("#moduleMapping#.model.MyService");
-
 	}
 
 	/**
@@ -118,32 +110,27 @@ component {
 	*/
 	function onLoad(){
 		parseParentSettings();
-		var MailGunSettings = controller.getConfigSettings().MailGunSettings;
-		binder.map( "mailgun" )
-			.to( "#moduleMapping#.mailgun" )
-			.initArg( name="secretApiKey", 	value=MailGunSettings.secretApiKey )
-			.initArg( name="publicApiKey", 	value=MailGunSettings.publicApiKey )
-			.initArg( name="domain", 		value=MailGunSettings.domain )
-			.initArg( name="baseUrl", 		value=MailGunSettings.baseUrl );
-
+		var MailGunSettings = controller.getConfigSettings().MailGun;
+		 binder.map( 'mailgun' )
+			.to( '#moduleMapping#.mailgun' )
+			.initArg( name='secretApiKey', value=MailGunSettings.secretApiKey )
+			.initArg( name='publicApiKey', value=MailGunSettings.publicApiKey )
+			.initArg( name='domain', value=MailGunSettings.domain )
+			.initArg( name='baseUrl', value=MailGunSettings.baseUrl );
 	}
 
-	/**
-	* Fired when the module is unregistered and unloaded
-	*/
+
 	function onUnload(){
-
 	}
 
-	/**
-	* parse parent settings
-	*/
+
 	private function parseParentSettings(){
-		var oConfig 		= controller.getSetting( "ColdBoxConfig" );
+		var oConfig 		= controller.getSetting( 'ColdBoxConfig' );
 		var configStruct 	= controller.getConfigSettings();
-		configStruct.MailGunSettings = variables.settings;
-		
-}
+		if( !structKeyExists( configStruct, 'MailGun' ) ){
+			configStruct.MailGun = variables.settings;
+		}
+	}
 
 	
 

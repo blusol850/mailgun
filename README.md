@@ -24,14 +24,16 @@ property name="mailGunService" inject="mailgun";
 ```
 
 ## Configure Settings
-ModuleConfig.cfc
+Coldbox.cfc
 ```
-settings = {
-    secretApiKey = 'key-xxx', 
-    publicApiKey = 'pubkey-xxx', 
-    domain = 'yourdomain.com', 
-    baseUrl = 'https://api.mailgun.net/v3' 
-    };
+Settings{
+    MailGun = {
+        secretApiKey = 'key-xxx', 
+        publicApiKey = 'pubkey-xxx', 
+        domain = 'yourdomain.com', 
+        baseUrl = 'https://api.mailgun.net/v3' 
+    }
+};
 ```
 
 # Available Methods
